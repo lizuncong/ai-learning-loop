@@ -36,6 +36,12 @@ ai-learning-loop/
 
 Clone or copy this directory into the skill location used by your agent.
 
+GitHub repository:
+
+```text
+https://github.com/lizuncong/ai-learning-loop
+```
+
 ### Claude Code
 
 Personal skill:
@@ -62,6 +68,12 @@ Use the shared agent skills convention:
 
 ```text
 .agents/skills/ai-learning-loop/
+```
+
+Codex can also install from the GitHub URL:
+
+```text
+$skill-installer install https://github.com/lizuncong/ai-learning-loop
 ```
 
 ### Cursor
@@ -109,6 +121,10 @@ Skip it for disposable boilerplate, formatting chores, one-off scripts, or code 
 - Small enough to load often without wasting context.
 - Focused on agent behavior rather than human-facing documentation.
 - Open source and easy to fork.
+
+## Publishing
+
+Maintainers can publish this skill through GitHub releases, `gh skill publish`, and skill registries. See [PUBLISHING.md](PUBLISHING.md).
 
 ## License
 
