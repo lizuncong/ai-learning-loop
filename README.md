@@ -4,14 +4,15 @@
 
 AI Learning Loop is a portable Agent Skill for using AI assistants without outsourcing comprehension.
 
-It is inspired by Addy Osmani's essay [Don't Outsource the Learning](https://addyosmani.com/blog/dont-outsource-learning/). The core idea is simple: AI should help you ship and learn. If the work is done but your mental model did not improve, you are accumulating cognitive debt.
+It is inspired by Addy Osmani's essay [Don't Outsource the Learning](https://addyosmani.com/blog/dont-outsource-learning/). The core idea is simple: AI should help you ship and learn. When AI introduces an unfamiliar API, pattern, best practice, or design choice, it should explain the concept, source or basis, tradeoff, and reason for using it.
 
 ## What It Does
 
 This skill gives coding agents a lightweight workflow for AI-assisted engineering:
 
+- Surface unfamiliar concepts, APIs, patterns, and best practices.
+- Explain what they mean, where the guidance comes from, and why they apply.
 - Form a hypothesis before asking the model for a fix.
-- Ask for explanations and tradeoffs before generated code in unfamiliar areas.
 - Treat AI output like a pull request from a junior engineer.
 - Require evidence such as tests, logs, screenshots, or manual verification.
 - End substantial sessions with both a shipping checkpoint and a learning checkpoint.
@@ -111,7 +112,7 @@ Use $ai-learning-loop to review this AI-generated diff and tell me what I should
 
 ## When To Use It
 
-Use this skill for non-trivial AI-assisted coding, debugging, reviewing, architecture decisions, and learning new libraries or codebases.
+Use this skill for non-trivial AI-assisted coding, debugging, reviewing, architecture decisions, and learning new libraries or codebases. It is especially useful when the answer depends on unfamiliar knowledge, external documentation, or a recommended best practice.
 
 Skip it for disposable boilerplate, formatting chores, one-off scripts, or code the user explicitly does not need to understand.
 

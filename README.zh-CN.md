@@ -4,14 +4,15 @@
 
 AI Learning Loop 是一个通用的 Agent Skill，帮助你在使用 AI 助手写代码、调试、评审和学习时，不把理解本身外包给 AI。
 
-这个 Skill 受到 Addy Osmani 的文章 [Don't Outsource the Learning](https://addyosmani.com/blog/dont-outsource-learning/) 启发。核心观点很直接：AI 应该帮你更快交付，也应该让你更会思考。如果任务完成了，但你的 mental model 没有变清晰，你就在积累认知债务。
+这个 Skill 受到 Addy Osmani 的文章 [Don't Outsource the Learning](https://addyosmani.com/blog/dont-outsource-learning/) 启发。核心观点很直接：AI 应该帮你更快交付，也应该让你更会思考。当 AI 引入陌生 API、设计模式、最佳实践或方案选择时，它应该解释概念、来源或依据、权衡，以及为什么在这里使用。
 
 ## 它解决什么问题
 
 这个 Skill 会给编码智能体一套轻量的 AI 协作工作流：
 
+- 主动暴露陌生概念、API、模式和最佳实践。
+- 解释它们是什么意思、依据来自哪里、为什么适用于当前任务。
 - 在向模型要修复方案之前，先形成一个假设。
-- 在陌生领域，先解释概念、替代方案和权衡，再生成代码。
 - 把 AI 输出当成初级工程师提交的 PR 来审查。
 - 要求测试、日志、截图、手动验证等证据。
 - 在重要会话结束时，同时检查“是否交付”和“是否学到了东西”。
@@ -125,7 +126,7 @@ Use $ai-learning-loop to review this AI-generated diff and tell me what I should
 
 ## 什么时候使用
 
-适合用于非平凡的 AI 辅助编码、调试、代码评审、架构决策，以及学习新库、新框架或新代码库。
+适合用于非平凡的 AI 辅助编码、调试、代码评审、架构决策，以及学习新库、新框架或新代码库。尤其适合答案依赖陌生知识、外部文档或某种最佳实践的场景。
 
 可以跳过的场景：一次性样板代码、格式调整、临时脚本，或者用户明确表示不需要理解和维护的代码。
 

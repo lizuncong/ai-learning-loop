@@ -1,5 +1,5 @@
 interface:
   display_name: "AI Learning Loop"
-  short_description: "Use AI without outsourcing comprehension"
+  short_description: "Learn concepts behind AI-generated work"
   brand_color: "#2563EB"
   default_prompt: "Use $ai-learning-loop to help me ship this task while preserving my understanding."
