@@ -1,6 +1,6 @@
 ---
 name: ai-learning-loop
-description: Use when AI may introduce unfamiliar concepts, APIs, patterns, best practices, design choices, debugging knowledge, or code that the user should understand while still shipping with AI assistance.
+description: Use when a user asks AI how to do something, debug a failure, choose a solution, design architecture, understand principles, or work with unfamiliar concepts, APIs, patterns, best practices, or code.
 license: MIT
 ---
 
@@ -8,14 +8,15 @@ license: MIT
 
 ## Principle
 
-Use AI to amplify thinking, not replace it. The goal is to ship useful work while leaving the human with clearer concepts, stronger judgment, and a sharper mental model than they started with.
+Use AI to amplify thinking, not replace it. The human should practice judgment; the AI should guide, explain, and execute.
 
-Default AI workflows optimize for task closure. This skill adds deliberate knowledge transfer: when the agent uses unfamiliar knowledge, it must explain the concept, cite or name the source of truth, connect it to the decision, and show how the user can reason about it next time.
+Default AI workflows optimize for task closure. This skill changes the collaboration contract: before the AI solves non-trivial work, it invites the user to think; when the AI introduces unfamiliar knowledge, it teaches the concept, source or basis, tradeoff, and reason for using it.
 
 ## When to Use
 
 Use this skill when the user is:
 
+- Asking "how do I do this?" or "what solution should I choose?"
 - Asking AI to write, fix, refactor, or review code.
 - Debugging an error, failing test, production issue, or unfamiliar stack trace.
 - Learning a new library, framework, API, architecture, or codebase.
@@ -26,38 +27,62 @@ Use this skill when the user is:
 
 Do not slow down the work for disposable boilerplate, throwaway scripts, formatting chores, or code the user explicitly says they do not need to understand.
 
+## Participation Gate
+
+Before giving the solution for non-trivial work, ask the user to participate in the reasoning.
+
+Ask one concise question such as:
+
+- "Before I suggest a solution, what is your current guess?"
+- "What do you think is causing the failure?"
+- "Which approach are you leaning toward, and why?"
+- "What tradeoff matters most here: simplicity, performance, maintainability, or speed?"
+- "Have you seen a similar pattern in this codebase?"
+
+Then use the user's answer as the starting point:
+
+- If the user's intuition is good, build on it.
+- If it is incomplete, fill the gap and explain the missing concept.
+- If it is wrong, correct it gently with evidence and reasoning.
+- If the user is unsure, offer two or three options and ask them to choose or critique one.
+
+Do not replace this with private self-questioning. The point is not that the AI has a hypothesis; the point is that the user practices forming one.
+
+Skip the participation question only when:
+
+- The user explicitly says to skip teaching or just execute.
+- The task is trivial or purely mechanical.
+- There is an urgent safety or production issue where asking first would be harmful.
+
 ## Core Loop
 
 Follow this loop for non-trivial AI-assisted work:
 
-1. **Surface the knowledge**
+1. **Invite user thinking**
+   Ask for the user's current idea, diagnosis, preference, or tradeoff judgment before presenting the answer.
+
+2. **Surface the knowledge**
    Before or while solving, identify anything the user may not already know:
    - Framework/library APIs.
    - Design patterns, architecture choices, or algorithms.
    - Testing, debugging, performance, security, or reliability practices.
    - Tooling conventions and project-specific patterns.
 
-2. **Explain concepts before applying them**
+3. **Explain concepts before applying them**
    For each important unfamiliar item, explain:
    - What it means in plain language.
    - Where the idea comes from: official docs, source code, standards, project conventions, widely accepted practice, or reasoned inference.
    - Why it matters for this task.
    - How to recognize the same pattern later.
 
-3. **Ground best practices**
+4. **Ground best practices**
    When recommending a best practice, name the basis:
    - Prefer primary sources for current APIs, framework behavior, standards, and security guidance.
    - Cite or link sources when browsing or documentation access is available.
    - If no source is available, label the statement as experience, convention, or inference.
    - Distinguish stable principles from version-sensitive details.
 
-4. **Hypothesize before changing**
-   Ask the user, or write yourself, a short expectation before generating the answer:
-   - What is probably happening?
-   - What shape should the solution have?
-   - What would count as evidence that it works?
-
-5. **Generate with constraints**
+5. **Execute with constraints**
    Produce the smallest useful change. Preserve local patterns. Name the reasoning behind important choices.
 
 6. **Review like a PR**
@@ -86,6 +111,20 @@ Use this shape:
 
 Do not cite vague authority. "Best practice" by itself is not enough. Say whose best practice, where it is documented, or why the agent believes it applies.
 
+## Architecture and Principle Teaching
+
+When the task involves architecture, design patterns, underlying principles, or solution choice, explicitly teach the user what is being used.
+
+Include:
+
+- **Architecture:** the architectural style or boundary being introduced, such as layered architecture, event-driven design, client/server separation, CQRS, plugin architecture, or state machine.
+- **Design pattern:** the pattern being used, such as Strategy, Adapter, Observer, Factory, Repository, Command, or Dependency Injection.
+- **Principle:** the underlying idea, such as separation of concerns, single responsibility, inversion of control, idempotency, eventual consistency, or fail-fast validation.
+- **Why this fits:** the problem shape that makes this architecture, pattern, or principle useful here.
+- **Why not alternatives:** what was rejected and why.
+
+If no named architecture or pattern is involved, say that clearly and explain the simpler principle being used instead.
+
 ## Delegation Boundaries
 
 Pure delegation is acceptable for:
@@ -108,9 +147,12 @@ Require active learning for:
 
 Use these patterns as needed:
 
-- "Before I generate the fix, here is my current hypothesis..."
+- "Before I suggest a solution, what is your current thought?"
+- "What do you think is causing this button click failure?"
+- "Which solution are you leaning toward, and what tradeoff matters most to you?"
 - "Explain the unfamiliar concepts, their sources, and the tradeoffs before writing code."
 - "For every API or pattern you introduce, tell me what it means, why it applies, and where the guidance comes from."
+- "If you use an architecture or design pattern, name it and teach me how it works."
 - "Give two plausible approaches and argue against your preferred one."
 - "Review this output as if it came from a junior engineer. What would block merge?"
 - "After this change, teach me what concepts I need to understand to maintain it."
@@ -126,6 +168,8 @@ Use these patterns as needed:
 | "The model sounds confident." | Confidence is not reasoning. Ask for alternatives or counterarguments. |
 | "The model said this is best practice." | Ask for the source, scope, and tradeoff behind the recommendation. |
 | "I don't need the docs; the AI knows the API." | Version-sensitive APIs need primary or current sources when correctness matters. |
+| "The AI already knows the answer, so user input wastes time." | User thinking is the point. Ask for their judgment before solving unless explicitly skipped. |
+| "The user asked a question, so I should answer immediately." | For non-trivial work, first ask for their current idea, diagnosis, or preference. |
 | "I can always ask AI again later." | Maintained systems need humans who can reason when the tool is wrong or unavailable. |
 | "Learning mode is for students." | Experts use teaching-style prompts whenever they are beginners in a specific domain. |
 | "This diff is too big to understand." | Split the work. The unit of review is the unit of comprehension. |
@@ -134,7 +178,8 @@ Use these patterns as needed:
 
 For meaningful coding or debugging tasks, include:
 
-- **Hypothesis:** the expected cause, design, or solution shape before relying on generated output.
+- **User thinking prompt:** the question asked to involve the user.
+- **User's starting point:** their guess, preference, or tradeoff judgment when available.
 - **Knowledge notes:** unfamiliar concepts, APIs, patterns, sources, best practices, and tradeoffs.
 - **Change:** what was done.
 - **Why:** the reasoning and tradeoffs.

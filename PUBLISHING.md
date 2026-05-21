@@ -26,7 +26,7 @@ ai-learning-loop
 Suggested description:
 
 ```text
-A portable Agent Skill for using AI assistants without outsourcing comprehension.
+A portable Agent Skill for making AI assistants guide user thinking while they execute.
 ```
 
 Suggested topics:
@@ -93,13 +93,13 @@ ai-learning-loop
 Short description:
 
 ```text
-Use AI assistants without outsourcing comprehension.
+Guide user thinking while AI executes.
 ```
 
 Long description:
 
 ```text
-AI Learning Loop is a portable Agent Skill for AI-assisted engineering. It helps coding agents preserve the user's understanding while still shipping work by forming hypotheses, explaining tradeoffs, reviewing AI output like a PR, requiring evidence, and ending sessions with learning checkpoints.
+AI Learning Loop is a portable Agent Skill for AI-assisted engineering. It makes coding agents ask for the user's current thought, diagnosis, or tradeoff preference before solving non-trivial work, then teach unfamiliar concepts, APIs, architectures, design patterns, principles, sources, and tradeoffs while the AI executes.
 ```
 
 Install command examples:

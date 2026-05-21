@@ -2,17 +2,18 @@
 
 [中文](README.zh-CN.md)
 
-AI Learning Loop is a portable Agent Skill for using AI assistants without outsourcing comprehension.
+AI Learning Loop is a portable Agent Skill for making AI assistants guide the user's thinking instead of merely outputting answers.
 
-It is inspired by Addy Osmani's essay [Don't Outsource the Learning](https://addyosmani.com/blog/dont-outsource-learning/). The core idea is simple: AI should help you ship and learn. When AI introduces an unfamiliar API, pattern, best practice, or design choice, it should explain the concept, source or basis, tradeoff, and reason for using it.
+It is inspired by Addy Osmani's essay [Don't Outsource the Learning](https://addyosmani.com/blog/dont-outsource-learning/). The core idea is simple: the human practices judgment, the AI explains and executes. When the user asks "how should I do this?", reports a failed click, or asks for a solution, the AI should first invite the user to share their guess, diagnosis, or tradeoff preference. When the AI introduces an unfamiliar API, architecture, design pattern, best practice, or principle, it should explain what it is, where the guidance comes from, why it applies, and what tradeoffs it has.
 
 ## What It Does
 
 This skill gives coding agents a lightweight workflow for AI-assisted engineering:
 
+- Ask the user for their current thought, diagnosis, or preference before solving non-trivial work.
 - Surface unfamiliar concepts, APIs, patterns, and best practices.
 - Explain what they mean, where the guidance comes from, and why they apply.
-- Form a hypothesis before asking the model for a fix.
+- Name architectures, design patterns, and principles when they are used.
 - Treat AI output like a pull request from a junior engineer.
 - Require evidence such as tests, logs, screenshots, or manual verification.
 - End substantial sessions with both a shipping checkpoint and a learning checkpoint.
@@ -112,7 +113,7 @@ Use $ai-learning-loop to review this AI-generated diff and tell me what I should
 
 ## When To Use It
 
-Use this skill for non-trivial AI-assisted coding, debugging, reviewing, architecture decisions, and learning new libraries or codebases. It is especially useful when the answer depends on unfamiliar knowledge, external documentation, or a recommended best practice.
+Use this skill for non-trivial AI-assisted coding, debugging, reviewing, architecture decisions, and learning new libraries or codebases. It is especially useful when the user asks for a solution, reports a failure, compares approaches, or when the answer depends on unfamiliar knowledge, external documentation, architecture, design patterns, principles, or best practices.
 
 Skip it for disposable boilerplate, formatting chores, one-off scripts, or code the user explicitly does not need to understand.
 
